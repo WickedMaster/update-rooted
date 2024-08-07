@@ -198,13 +198,6 @@ checkCApem() {
                 fi
         fi
 
-        if [ ! -f /usr/local/share/ca-certificates/DomeinServerCA2020.crt ]
-        then
-                echo "Adding intermediate Staat der Nederlanden Domein Server CA 2020 - for NLalert API"
-                /usr/bin/curl -Nks https://cert.pkioverheid.nl/DomeinServerCA2020.cer -o /tmp/DomeinServerCA2020.cer
-                openssl x509 -inform der -in /tmp/DomeinServerCA2020.cer -out /usr/local/share/ca-certificates/DomeinServerCA2020.crt
-                UPDATECA=true
-        fi
         if [ "$UPDATECA" = true ]
         then
                 /usr/sbin/update-ca-certificates
